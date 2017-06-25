@@ -9,7 +9,6 @@ use Composer\Script\ScriptEvents;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\Util\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Composer\Util\Filesystem;
 
 class Plugin implements PluginInterface, EventSubscriberInterface
 {
