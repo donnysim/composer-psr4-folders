@@ -1,0 +1,16 @@
+{
+    "name": "donnysim/composer-psr4-folders",
+    "type": "composer-plugin",
+    "version": "1.0.0",
+    "require": {
+        "composer-plugin-api": "^1.1"
+    },
+    "extra": {
+        "class": "Psr4Folders\\Plugin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Psr4Folders\\": "src"
+        }
+    }
+}
