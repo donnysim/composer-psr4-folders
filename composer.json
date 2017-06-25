@@ -1,6 +1,8 @@
 {
     "name": "donnysim/composer-psr4-folders",
+    "license": "MIT",
     "type": "composer-plugin",
+    "description": "Generate PSR-4 entries for subfolders.",
     "version": "1.0.0",
     "require": {
         "composer-plugin-api": "^1.1"
