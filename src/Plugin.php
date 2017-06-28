@@ -31,6 +31,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
 
     public function preAutoloadDump()
     {
+        $ds = DIRECTORY_SEPARATOR;
         $package = $this->composer->getPackage();
         $filesystem = new Filesystem();
         $basePath = $filesystem->normalizePath(realpath(realpath(getcwd())));
@@ -42,17 +43,20 @@ class Plugin implements PluginInterface, EventSubscriberInterface
                 $autoload['psr-4'] = [];
             }
 
-
             foreach ($autoload['psr-4-folders'] as $folder) {
-                $folderPath = $basePath . '/' . $folder;
+                $folderPath = "{$basePath}{$ds}{$folder}";
 
                 foreach (Finder::create()->directories()->depth(0)->in($folderPath) as $directory) {
                     $name = substr($directory, strlen($folderPath) + 1);
 
-                    if (is_dir($directory . '/src')) {
-                        $autoload['psr-4'][$name . '\\'] = $folder . $name . '/src/';
+                    if (is_dir("{$directory}{$ds}src")) {
+                        $autoload['psr-4'][$name . '\\'] = "{$folder}{$name}{$ds}src{$ds}";
                     } else {
-                        $autoload['psr-4'][$name . '\\'] = $folder . $name . '/';
+                        $autoload['psr-4'][$name . '\\'] = "{$folder}{$name}{$ds}";
+                    }
+
+                    if (file_exists("{$directory}{$ds}functions.php")) {
+                        $autoload['files'][] = "{$folder}{$name}{$ds}functions.php";
                     }
                 }
             }
